@@ -1,41 +1,41 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import GridView from '../views/GridView.vue'
-import FormView from '../views/FormView.vue'
-import CardView from '../views/CardView.vue'
-import AlertView from '../views/AlertView.vue'
-import TabsView from '../views/TabsView.vue'
-import TableView from '../views/TableView.vue'
+import InicioAdminView from '../views/Administrador/InicioAdminView.vue'
+import VentasAdminView from '../views/Administrador/VentasAdminView.vue'
+import ProductosAdminView from '../views/Administrador/ProductosAdminView.vue'
+import InventarioAdminView from '../views/Administrador/InventarioAdminView.vue'
+import UsuariosAdminView from '../views/Administrador/UsuariosAdminView.vue'
+import ReportesAdminView from '../views/Administrador/ReportesAdminView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Grid',
-    component: GridView
+    name: 'InicioAV',
+    component: InicioAdminView
   },
   {
-    path: '/form',
-    name: 'Form',
-    component: FormView
+    path: '/ventas',
+    name: 'VentasAV',
+    component: VentasAdminView
   },
   {
-    path: '/card',
-    name: 'Card',
-    component: CardView
+    path: '/productos',
+    name: 'ProductosAV',
+    component: ProductosAdminView
   },
   {
-    path: '/alert',
-    name: 'Alert',
-    component: AlertView
+    path: '/inventario',
+    name: 'InventarioAV',
+    component: InventarioAdminView
   },
   {
-    path: '/tabs',
-    name: 'Tabs',
-    component: TabsView
+    path: '/usuarios',
+    name: 'UsuariosAV',
+    component: UsuariosAdminView
   },
   {
-    path: '/table',
-    name: 'Table',
-    component: TableView
+    path: '/reportes',
+    name: 'ReportesAV',
+    component: ReportesAdminView
   },
 ]
 
