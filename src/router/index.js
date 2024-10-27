@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import InicioAdminView from '../views/Administrador/InicioAdminView.vue'
 import VentasAdminView from '../views/Administrador/VentasAdminView.vue'
-import ProductosAdminView from '../views/Administrador/ProductosAdminView.vue'
+import MedicamentosAdminView from '../views/Administrador/MedicamentosAdminView.vue'
 import InventarioAdminView from '../views/Administrador/InventarioAdminView.vue'
 import UsuariosAdminView from '../views/Administrador/UsuariosAdminView.vue'
 import ReportesAdminView from '../views/Administrador/ReportesAdminView.vue'
@@ -18,9 +18,9 @@ const routes = [
     component: VentasAdminView
   },
   {
-    path: '/productos',
-    name: 'ProductosAV',
-    component: ProductosAdminView
+    path: '/medicamentos',
+    name: 'MedicamentosAV',
+    component: MedicamentosAdminView
   },
   {
     path: '/inventario',

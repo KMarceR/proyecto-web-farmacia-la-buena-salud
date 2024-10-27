@@ -2,7 +2,7 @@
     <v-container :fluid=true>
         <v-row>
             <v-col class="text-indigo">
-                <h1>Productos</h1>
+                <h1>Medicamentos</h1>
             </v-col>
         </v-row>
 
@@ -36,6 +36,6 @@
 
 <script>
 export default {
-    name: 'ProductosAdminView'
+    name: 'MedicamentosAdminView'
 }
 </script>
