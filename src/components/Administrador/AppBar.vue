@@ -4,7 +4,7 @@
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-app-bar-title>Farmacia La Buena</v-app-bar-title>
         <!-- Esto agregará un botón para navegar a la ruta / -->
-        <v-btn icon="mdi-home" to="/"></v-btn>
+        <v-btn icon="mdi-account-circle" to="/"></v-btn>
     </v-app-bar>
 </template>
 
