@@ -5,6 +5,7 @@ import MedicamentosAdminView from '../views/Administrador/MedicamentosAdminView.
 import InventarioAdminView from '../views/Administrador/InventarioAdminView.vue'
 import UsuariosAdminView from '../views/Administrador/UsuariosAdminView.vue'
 import ReportesAdminView from '../views/Administrador/ReportesAdminView.vue'
+import ProveedoresView from '@/views/Administrador/ProveedoresView.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/reportes',
     name: 'ReportesAV',
     component: ReportesAdminView
+  },
+  {
+    path: '/proveedores',
+    name: 'ProveedoresAV',
+    component: ProveedoresView
   },
 ]
 
