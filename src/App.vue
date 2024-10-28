@@ -8,6 +8,7 @@
         <v-list-item link to="/inventario" title="Inventario" prepend-icon="mdi-clipboard-edit-outline"></v-list-item>
         <v-list-item link to="/usuarios" title="Usuarios" prepend-icon="mdi-account-group-outline"></v-list-item>
         <v-list-item link to="/reportes" title="Reportes" prepend-icon="mdi-file-chart-outline"></v-list-item>
+        <v-list-item link to="/proveedores" title="Proveedores" prepend-icon="mdi-file-chart-outline"></v-list-item>
     </v-navigation-drawer>
     <!-- Carga de componentes -->
     <v-main>
