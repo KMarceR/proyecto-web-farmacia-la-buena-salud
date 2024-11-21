@@ -10,41 +10,22 @@
         <!-- Búsqueda y Filtros -->
         <v-row class="mb-1">
             <v-col cols="12" sm="6" md="8">
-                <v-text-field
-                    v-model="busqueda"
-                    label="Buscar Medicamento"
-                    prepend-inner-icon="mdi-magnify"
-                    clearable
-                    hide-details
-                ></v-text-field>
+                <v-text-field v-model="busqueda" label="Buscar Medicamento" prepend-inner-icon="mdi-magnify" clearable
+                    hide-details></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-                <v-select
-                    v-model="categoriaSeleccionada"
-                    :items="categorias"
-                    item-title="nombre_categoria"
-                    item-value="id"
-                    label="Filtrar por categoría"
-                    clearable
-                    hide-details
-                ></v-select>
+                <v-select v-model="categoriaSeleccionada" :items="categorias" item-title="nombre_categoria"
+                    item-value="id" label="Filtrar por categoría" clearable hide-details></v-select>
             </v-col>
         </v-row>
 
         <!-- Tabla de productos -->
         <v-row>
             <v-col cols="12">
-                <v-data-table
-                    class="border rounded-md"
-                    :headers="headers"
-                    :items="productosFiltrados"
-                    :items-per-page="5"
-                    :loading="loading"
-                    :header-props="{
+                <v-data-table class="border rounded-md" :headers="headers" :items="productosFiltrados"
+                    :items-per-page="5" :loading="loading" :header-props="{
                         class: 'bg-teal-lighten-2'
-                    }"
-                    no-data-text="No se encontraron productos"
-                >
+                    }" no-data-text="No se encontraron productos">
                     <template v-slot:top>
                         <v-toolbar flat class="bg-grey-lighten-5">
                             <v-toolbar-title>Administrar Medicamentos</v-toolbar-title>
@@ -64,41 +45,25 @@
                                             <v-form ref="formRef" v-model="valid">
                                                 <v-row>
                                                     <v-col cols="12">
-                                                        <v-text-field
-                                                            v-model="producto.nombre_producto"
-                                                            :rules="[rules.required]"
-                                                            label="Nombre del producto"
-                                                            required
-                                                        ></v-text-field>
+                                                        <v-text-field v-model="producto.nombre_producto"
+                                                            :rules="[rules.required]" label="Nombre del producto"
+                                                            required></v-text-field>
                                                     </v-col>
                                                     <v-col cols="12">
-                                                        <v-select
-                                                            v-model="producto.categoria_id"
-                                                            :items="categorias"
-                                                            item-value="id"
-                                                            item-title="nombre_categoria"
-                                                            label="Categoría"
-                                                            :rules="[rules.required]"
-                                                            required
-                                                        ></v-select>
+                                                        <v-select v-model="producto.categoria_id" :items="categorias"
+                                                            item-value="id" item-title="nombre_categoria"
+                                                            label="Categoría" :rules="[rules.required]"
+                                                            required></v-select>
                                                     </v-col>
                                                     <v-col cols="12" md="6">
-                                                        <v-text-field
-                                                            v-model="producto.precio"
-                                                            :rules="[rules.required, rules.positive]"
-                                                            label="Precio"
-                                                            type="number"
-                                                            required
-                                                        ></v-text-field>
+                                                        <v-text-field v-model="producto.precio"
+                                                            :rules="[rules.required, rules.positive]" label="Precio"
+                                                            type="number" required></v-text-field>
                                                     </v-col>
                                                     <v-col cols="12" md="6">
-                                                        <v-text-field
-                                                            v-model="producto.stock"
-                                                            :rules="[rules.required, rules.integer]"
-                                                            label="Stock"
-                                                            type="number"
-                                                            required
-                                                        ></v-text-field>
+                                                        <v-text-field v-model="producto.stock"
+                                                            :rules="[rules.required, rules.integer]" label="Stock"
+                                                            type="number" required></v-text-field>
                                                     </v-col>
                                                 </v-row>
                                             </v-form>
@@ -109,12 +74,8 @@
                                         <v-btn color="error" variant="flat" @click="cerrarDialogo">
                                             Cancelar
                                         </v-btn>
-                                        <v-btn
-                                            color="success"
-                                            variant="flat"
-                                            :disabled="!valid"
-                                            @click="producto.id ? actualizarProducto() : crearProducto()"
-                                        >
+                                        <v-btn color="success" variant="flat" :disabled="!valid"
+                                            @click="producto.id ? actualizarProducto() : crearProducto()">
                                             Guardar
                                         </v-btn>
                                     </v-card-actions>
@@ -180,15 +141,16 @@ export default {
             return this.producto.id ? 'Editar Producto' : 'Nuevo Producto';
         },
         productosFiltrados() {
+            if (!this.productos) return [];
+
             return this.productos
                 .filter(producto => {
-                    const coincideNombre = producto.nombre_producto
-                        .toLowerCase()
-                        .includes(this.busqueda.toLowerCase());
-                    
-                    const coincideCategoria = !this.categoriaSeleccionada || 
+                    const nombreProducto = (producto.nombre_producto || '').toLowerCase();
+                    const busqueda = (this.busqueda || '').toLowerCase();
+                    const coincideCategoria = !this.categoriaSeleccionada ||
                         producto.categoria_id === this.categoriaSeleccionada;
-                    
+                    const coincideNombre = nombreProducto.includes(busqueda);
+
                     return coincideNombre && coincideCategoria;
                 })
                 .map(producto => {
@@ -213,7 +175,7 @@ export default {
         async obtenerProductos() {
             this.loading = true;
             try {
-                const { data } = await axios.get('http://127.0.0.1:8000/api/productos/select');
+                const { data } = await axios.get('/api/productos/select',);
                 if (data.code === 200) {
                     this.productos = data.data;
                 }
@@ -225,7 +187,7 @@ export default {
         },
         async obtenerCategorias() {
             try {
-                const { data } = await axios.get('http://127.0.0.1:8000/api/categorias/select');
+                const { data } = await axios.get('/api/categorias/select');
                 if (data.code === 200) {
                     this.categorias = data.data;
                 }
@@ -235,7 +197,7 @@ export default {
         },
         async crearProducto() {
             try {
-                const { data } = await axios.post('http://127.0.0.1:8000/api/productos/store', this.producto);
+                const { data } = await axios.post('/api/productos/store', this.producto);
                 if (data.code === 200) {
                     this.mostrarMensaje('Producto agregado correctamente');
                     this.obtenerProductos();
@@ -249,7 +211,7 @@ export default {
         async actualizarProducto() {
             try {
                 const { data } = await axios.put(
-                    `http://127.0.0.1:8000/api/productos/update/${this.producto.id}`,
+                    `/api/productos/update/${this.producto.id}`,
                     this.producto
                 );
                 if (data.code === 200) {
@@ -279,7 +241,7 @@ export default {
 
             if (confirm.isConfirmed) {
                 try {
-                    const { data } = await axios.delete(`http://127.0.0.1:8000/api/productos/delete/${id}`);
+                    const { data } = await axios.delete(`/api/productos/delete/${id}`);
                     if (data.code === 200) {
                         this.mostrarMensaje('Producto eliminado correctamente');
                         this.obtenerProductos();
